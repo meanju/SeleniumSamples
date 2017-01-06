@@ -56,17 +56,26 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Framework\MyFirefoxBrowser.cs" />
     <Compile Include="Googlesearch2.cs" />
+    <Compile Include="PageObjects\GoogleHome.cs" />
+    <Compile Include="PageObjects\YoutubeHome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestGoogleHome.cs" />
+    <Compile Include="TestYoutube.cs" />
+    <Compile Include="Test_TestCasesFromString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
