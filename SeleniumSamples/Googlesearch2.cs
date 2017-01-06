@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SeleniumTests
 {
     [TestClass]
-    public class TestGoogle
+    public class Googlesearch2
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -21,7 +21,7 @@ namespace SeleniumTests
         [TestInitialize]
         public void SetupTest()
         {
-            driver = new OpenQA.Selenium.IE.InternetExplorerDriver();
+            driver = new FirefoxDriver();
             baseURL = "https://www.google.com/";
             verificationErrors = new StringBuilder();
         }
@@ -37,17 +37,40 @@ namespace SeleniumTests
             {
                 // Ignore errors if unable to close the browser
             }
-           
+            Assert.AreEqual("", verificationErrors.ToString());
         }
 
         [TestMethod]
-        public void TheGooglesearchTest()
+        public void Validate_Title_Is_Google()
         {
-            driver.Navigate().GoToUrl(baseURL + "/?gws_rd=ssl");
-         
+            driver.Navigate().GoToUrl(baseURL + "/");
+            var title = driver.Title;
 
-            Assert.IsTrue(verificationErrors.Length == 0);
+            Assert.AreEqual(title, "Google");
         }
+
+        [TestMethod]
+        public void Validate_Btnk_Present_Google_Search()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/");
+            Assert.IsTrue(IsElementPresent(By.Name("btnK")));
+        }
+
+        [TestMethod]
+        public void Validate_ABCD_Not_Present_Google_Search()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/");
+            Assert.IsFalse(IsElementPresent(By.Name("ABCD")));
+        }
+
+
+
+        /// <summary>
+        /// The purpose of this method is to check if element is present or not
+        /// </summary>
+        /// <param name="by">By is a class which can take different parameters using which it can look 
+        /// for elements</param>
+        /// <returns></returns>
         private bool IsElementPresent(By by)
         {
             try
