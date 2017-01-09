@@ -1,53 +1,45 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SeleniumSamplesWinForm
 {
-    public class WorkingWithFirefox
+    class WorkingWithIE
     {
-        private IWebDriver driver = new FirefoxDriver();
-        string url = "http://www.google.com";
+        private IWebDriver driver = new InternetExplorerDriver();
+        string url = "http://www.bing.com";
 
         public void InvokeBrowser()
         {
-            //To maximize the window
             driver.Manage().Window.Maximize();
-           
-            //To delete all the cookies of the browser
             driver.Manage().Cookies.DeleteAllCookies();
-
-            //To navigate to the particular URL
             driver.Url = url;
-
-            // To get the Title of the page
             var titleOfPage = driver.Title;
-
             Console.WriteLine("Title of the page is: " + titleOfPage);
 
-            //To get The url of the page 
             var currentUrl = driver.Url;
+            Console.Error.WriteLine("The title of the url is: " + currentUrl);
 
-            Console.Error.WriteLine("Title of the page is " + currentUrl);
-
-            //To get The source code current page
             var pageSource = driver.PageSource;
 
             Console.WriteLine("Page Source" + pageSource);
-
         }
 
-        //To close current active window of the browse
         public void CloseBrowser()
         {
             driver.Close();
         }
 
-        //To close all the opened browser session
         public void CloseAllBrowser()
         {
             driver.Quit();
         }
+
     }
+
 }
+
